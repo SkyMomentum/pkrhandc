@@ -24,8 +24,8 @@ card_list* newEmptyCardList();
 card_list* newInitializedCardList(card_s *init_array, int length);
 void deleteCardList(card_list *t);
 
-card_list* pushCard(card_list *head, card_s card);
-card_list* popCard(card_list *head, card_s card);
+card_list* pushCard(card_list *head, card_s inputcard);
+card_list* popCard(card_list *head, card_s *ptr_popped);
 
 card_list* find_value_sets(card_list* sorted_cards);
 

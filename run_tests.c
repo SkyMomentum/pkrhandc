@@ -19,6 +19,7 @@ int main() {
     TEST_parseTwoCharCard_BadInputs();
     TEST_newEmptyCardList();
     TEST_newInitializedCardList();
-    
+    TEST_pushCard();
+    TEST_popCard();
     return 0;
 }

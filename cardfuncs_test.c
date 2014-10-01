@@ -90,7 +90,7 @@ bool TEST_newInitializedCardList(){
     memset(&testdata[8], 0, sizeof(card_s)); //null terminator
         
     result = newInitializedCardList(testdata, 7);
-    TEST_CHECK(result != NULL, "Recieved NULL ptr from function")
+    TEST_CHECK(result != NULL, "Recieved NULL ptr from function newInitializedCardList()")
     TEST_CHECK(result->card.suit == HEART, "Initialized to wrong suit")
     
     i = 0;
@@ -104,13 +104,69 @@ bool TEST_newInitializedCardList(){
 }
 
 bool TEST_deleteCardList(){
-    return false;
+    printf("TEST_deleteCardList()\n");
+    card_list *x = NULL;
+    x = newEmptyCardList();
+    deleteCardList(x);
+    return true; 
 }
 
 bool TEST_pushCard(){
-    return false;
+    printf("TEST_pushCard()\n");
+    card_s a, b;
+    card_list *firsthead = NULL, *second = NULL, *target = NULL;
+    
+    a.value = QUEEN;
+    a.suit = HEART;
+    
+    b.value = ACE;
+    b.suit = SPADE;
+    
+    firsthead = newEmptyCardList();
+    target = firsthead;
+    TEST_CHECK(target != NULL, "Recieved NULL ptr from function newEmptyCardList()")
+
+    target = pushCard(target, a);
+    TEST_CHECK(target != NULL, "Call returned a null")
+    TEST_CHECK(target != firsthead, "Call did not change the head of the list")
+    TEST_CHECK(target->card.value == QUEEN, "Wrong value: exp %d, recv %d", QUEEN, target->card.value)
+    
+    second = target;
+    target = pushCard(target, b);
+    TEST_CHECK(target != second, "Second call did not change the head of the list")
+    TEST_CHECK(target->card.value == ACE, "Wrong value: exp %d, recv %d", ACE, target->card.value)
+
+
+    return true;
 }
 
 bool TEST_popCard(){
-    return false;
+    printf("TEST_popCard()\n");
+    card_s a, b, popped;
+    card_list *firsthead = NULL, *second = NULL, *target = NULL ;
+    
+    a.value = QUEEN;
+    a.suit = HEART;
+    
+    b.value = ACE;
+    b.suit = SPADE;
+    
+    target = newEmptyCardList();
+    target = pushCard(target, a);
+    target = pushCard(target, b);    
+    TEST_CHECK(target != NULL, "Recieved NULL ptr from function after setup attempt")
+    
+    firsthead = target;
+    target = popCard(target, &popped);
+    TEST_CHECK(popped.value == ACE, "Wrong value: exp %d, recv %d", ACE, popped.value)
+    TEST_CHECK(target != firsthead, "First Call did not change the head of the list")
+    
+    second = target;
+    target = popCard(target, &popped);
+    TEST_CHECK(target != second, "Second Call did not change the head of the list")
+    TEST_CHECK(firsthead != second, "Call did not changed the head of the list to the same pointer as the first call")
+    TEST_CHECK(popped.value == QUEEN, "Wrong value: exp %d, recv %d", QUEEN, popped.value)
+
+
+    return true;
 }

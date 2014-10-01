@@ -86,6 +86,10 @@ card_list* newInitializedCardList(card_s *init_array, int length){
             list->next = NULL;
         } else {
             list->next = newEmptyCardList();
+            if (list->next == NULL) {
+                deleteCardList(head);
+                return NULL;
+            }
         }
         list->card = init_array[i];
         list = list->next;
@@ -93,28 +97,39 @@ card_list* newInitializedCardList(card_s *init_array, int length){
     return head;
 }
 
-card_list* pushCard(card_list *head, card_s pcard) {
-    /* -P-
-        make a new head
-        new->next = oldhead
-        new->card = pcard;
-    */
-    return NULL;
+card_list* pushCard(card_list *head, card_s inputcard) {
+    card_list *newhead = NULL;
+    
+    if (head == NULL) return NULL;
+    
+    newhead = newEmptyCardList();
+    if (newhead == NULL) return NULL;
+    
+    newhead->next = head;
+    newhead->card = inputcard;
+    
+    return newhead;
 }
 
-card_list* popCard(card_list *head, card_s pcard) {
-    /* -P-
-        return head->next; caller is responsible for freeing pop'd
-    */
-    return NULL;
+card_list* popCard(card_list *head, card_s *ptr_popped) {
+    card_list *newhead = NULL;
+
+    if (head == NULL) return NULL;
+    
+    ptr_popped->value = head->card.value;
+    ptr_popped->suit = head->card.suit;
+
+    newhead = head->next;
+    free(head);    
+
+    return newhead; 
 }
 
 void deleteCardList(card_list *t){
-    /* -P- 
-        if t->next != null
-            deleteCardList(t->next);
-        free(t);
-    */
+    if (t->next != NULL) {
+        deleteCardList(t->next);
+    }
+    free(t);
 }
 
 card_list* find_value_sets(card_list* sorted_cards) {
