@@ -1,3 +1,6 @@
+/*  Adhoc Test harness
+ *  TEST_ functions return false upon failure.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -72,4 +75,30 @@ bool TEST_parseTwoCharCard_GoodInputs() {
     }
     
     return true;
+}
+
+bool TEST_newEmptyCardList(){
+    card_list *p = NULL;
+    p = newEmptyCardList();
+    if (p){
+        TEST_CHECK(p->card.value == INVALID_VALUE, "Wrong value: exp %d, recv %d", INVALID_VALUE, p->card.value)
+        TEST_CHECK(p->card.suit == INVALID_SUIT, "Wrong value: exp %d, recv %d", INVALID_SUIT, p->card.value)
+    }
+    return true;
+}
+
+bool TEST_newInitializedCardList(){
+    return false;
+}
+
+bool TEST_deleteCardList(){
+    return false;
+}
+
+bool TEST_pushCard(){
+    return false;
+}
+
+bool TEST_popCard(){
+    return false;
 }

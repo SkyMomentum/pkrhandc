@@ -19,12 +19,12 @@ typedef struct {
     card_s* next;
 } card_list;
 
-card_list* newEmptyCardList(int length);
+card_list* newEmptyCardList();
 card_list* newInitializedCardList(card_s *init_array); //null terminated array.
 void deleteCardList(card_list *t);
 
-card_list* pushCard(cardlist *head, card_s card);
-card_list* popCard(cardlist *head, card_s card);
+card_list* pushCard(card_list *head, card_s card);
+card_list* popCard(card_list *head, card_s card);
 
 card_list* find_value_sets(card_list* sorted_cards);
 

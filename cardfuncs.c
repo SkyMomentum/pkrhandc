@@ -82,12 +82,18 @@ card_list* newInitializedCardList(card_s *init_array){
     */
 }
 
-card_list* pushCard(cardlist *head, card_s card) {
-
+card_list* pushCard(card_list *head, card_s pcard) {
+    /* -P-
+        make a new head
+        new->next = oldhead
+        new->card = pcard;
+    */
 }
 
-card_list* popCard(cardlist *head, card_s card) {
-
+card_list* popCard(card_list *head, card_s pcard) {
+    /* -P-
+        return head->next; caller is responsible for freeing pop'd
+    */
 }
 
 void deleteCardList(card_list *t){

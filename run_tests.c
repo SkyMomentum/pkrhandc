@@ -14,6 +14,7 @@
 #include "cardfuncs_test.h"
 
 int main() {
+    /* TODO: Keep track of the results */
     TEST_parseTwoCharCard_GoodInputs();
     TEST_parseTwoCharCard_BadInputs();
     
