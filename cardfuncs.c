@@ -59,3 +59,45 @@ card_s parseTwoCharCard(char c[3]){
     }
     return retval;
 }
+
+card_list* newEmptyCardList(){
+    /* -P-
+        void m = malloc(card_list));
+        memzero
+        return = (card_list*)m;
+    */
+}
+
+
+card_list* newInitializedCardList(card_s *init_array){
+    /* -P-
+    while init_array++ != NULL
+        x++;
+        
+    for i 0 to x
+        y = newEmptyCardlist();
+        y.card = init_array[x];
+        if i == x y->next = NULL
+        
+    */
+}
+
+card_list* pushCard(cardlist *head, card_s card) {
+
+}
+
+card_list* popCard(cardlist *head, card_s card) {
+
+}
+
+void deleteCardList(card_list *t){
+    /* -P- 
+        if t->next != null
+            deleteCardList(t->next);
+        free(t);
+    */
+}
+
+card_list* find_value_sets(card_list* sorted_cards) {
+
+}
