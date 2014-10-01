@@ -1,0 +1,91 @@
+﻿Accept 7 playing cards, natch 5 poker hands.
+    -Push down automaton for matching poker hands?
+    - or would finite state be powerful enough? no because i want to know which 5 cards of the 7(n?) given form the matched hand, fsm has a boolean output.   
+
+Using perl?
+
+Wikipedia:
+"""
+A PDA is formally defined as a 7-tuple:
+M=(Q, Σ, Γ, δ, q0, Z, F) where
+
+    Q is a finite set of states
+    Sigma is a finite set which is called the input alphabet
+    Gamma is a finite set which is called the stack alphabet
+    delta is a finite subset of Q \times (\Sigma \cup\{\varepsilon\}) \times \Gamma \times Q \times \Gamma^* , the transition relation.
+    q0 in Q is the start state
+    Z in Gamma is the initial stack symbol
+    F subseteq Q is the set of accepting states
+"""
+
+Assumptions:
+Hand will be sorted descending by face value.
+
+Input Alphabet:
+Playing cards, 2H - AH for the 2 to A of hearts, similarly for spades, diamonds, and clubs.
+
+Ex hands: 
+{KH, JS, 8D, 7D, 7C} - a pair
+{AH, KH, QH, JH, 10H} - straight flush (also royal flush)
+
+?? Alphabet:
+Sc Suited Connecting Value
+Uc Unsuited Connecting Value
+Sn Suited Non-Connecting Value
+Un Unsuited Non-Connecting Value
+Ur Unsuited Repeated Value, subscript {a,b,...} if needed
+x  Any card
+
+Hands To Find:
+
+In rank order:
+Straight Flush      {Sc, Sc, Sc, Sc, Sc}
+Four of a kind      {Ur, Ur, Ur, Ur, x}
+Full house          {Ur[a], Ur[a], Ur[a], Ur[b], Ur[b]}
+Flush               {Sn, Sn, Sn, Sn, Sn}
+Straight            {Uc, Uc, Uc, Uc, Uc}
+Three of a kind     {Ur, Ur, Ur, x, x}
+Two pair            {Ur[a], Ur[a], Ur[b], Ur[b], x}
+One Pair            {Ur, Ur, x, x, x}
+High Card - Degenerate case 
+
+In order by similarity:
+Straight Flush      {Sc, Sc, Sc, Sc, Sc}
+Flush               {Sn, Sn, Sn, Sn, Sn}
+Straight            {Uc, Uc, Uc, Uc, Uc}
+
+Four of a kind      {Ur[a], Ur[a], Ur[a], Ur[a], x}
+Three of a kind     {Ur[a], Ur[a], Ur[a], x, x}
+One Pair            {Ur[a], Ur[a], x, x, x}
+
+Two pair            {Ur[a], Ur[a], Ur[b], Ur[b], x}
+Full house          {Ur[a], Ur[a], Ur[a], Ur[b], Ur[b]}
+
+-- Only 2 cases each care about a handing being the same suit, or value sequential. Testing suit and sequence will cover all 3 hands.
+Sequence:
+u=value 
+u -> u - 1 -> u - 2 -> u - 3 -> u - 4 -> T
+
+Suit:
+w=suit
+w -> w -> w -> w -> w -> T
+
+Straight Flush:
+Sequence -> Suit -> T
+
+-- Next 5 could be a pda that pushes to the stack a symbol[tuple {A|B, n} where n is card id] each time a repeat value occurs
+As cards come sorted
+u=value
+A=card id being pushed to stack
+u -^A-> u -^A-> u -^A-> u -^A-> x
+Excluding cards in A search again for any secondary pair(B).
+The pair (a, b) = n(A), n(B)
+
+if b == 0
+    a + "of a kind" for a > 2 or "a pair of " when a == 1
+else if b == 2
+    "two pair" when a == 2
+    "full house" when a == 3
+
+a may be 0-3
+b may be 0 or 2 exclusively if a > 0 and a < 4
