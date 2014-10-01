@@ -6,7 +6,7 @@ typedef enum {
 } suit_t;
 
 typedef enum {
-    INVALID_VALUE = 1, TWO = 2, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
+    NULL_VALUE = 0, INVALID_VALUE = 1, TWO = 2, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 } facevalue_t;
 
 typedef struct {
@@ -14,13 +14,14 @@ typedef struct {
     suit_t suit;
 } card_s;
 
-typedef struct {
+
+typedef struct card_list{
     card_s card;
-    card_s* next;
+    struct card_list* next;
 } card_list;
 
 card_list* newEmptyCardList();
-card_list* newInitializedCardList(card_s *init_array); //null terminated array.
+card_list* newInitializedCardList(card_s *init_array, int length);
 void deleteCardList(card_list *t);
 
 card_list* pushCard(card_list *head, card_s card);

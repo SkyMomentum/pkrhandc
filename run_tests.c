@@ -17,6 +17,8 @@ int main() {
     /* TODO: Keep track of the results */
     TEST_parseTwoCharCard_GoodInputs();
     TEST_parseTwoCharCard_BadInputs();
+    TEST_newEmptyCardList();
+    TEST_newInitializedCardList();
     
     return 0;
 }

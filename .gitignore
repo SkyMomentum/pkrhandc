@@ -4,6 +4,9 @@
 *.obj
 *.elf
 
+# Misc
+*.stackdump
+
 # Libraries
 *.lib
 *.a

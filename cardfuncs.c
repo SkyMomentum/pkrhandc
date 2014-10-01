@@ -1,5 +1,6 @@
 #include <stdio.h>  /* REMOVE AFTER DEBUGGING  nothing should really print here*/
 #include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 
 #include "cardfuncs.h"
@@ -61,26 +62,35 @@ card_s parseTwoCharCard(char c[3]){
 }
 
 card_list* newEmptyCardList(){
-    /* -P-
-        void m = malloc(card_list));
-        memzero
-        return = (card_list*)m;
-    */
-    return NULL;
+    void *m = NULL;
+    
+    m = malloc(sizeof(card_list));
+    if(m == NULL) return NULL;
+    
+    memset(m, 0, sizeof(card_list));
+    return (card_list*)m;
 }
 
 
-card_list* newInitializedCardList(card_s *init_array){
-    /* -P-
-    while init_array++ != NULL
-        x++;
-        
-    for i 0 to x
-        y = newEmptyCardlist();
-        y.card = init_array[x];
-        if i == x y->next = NULL
-    */
-    return NULL;
+card_list* newInitializedCardList(card_s *init_array, int length){
+    int i = 0;
+    card_list *list = NULL, *head = NULL;
+    
+    if (init_array == NULL) return NULL;
+    
+    list = newEmptyCardList();
+    head = list;
+    
+    for (i = 0; i <= length; i++){
+        if (i == length) {
+            list->next = NULL;
+        } else {
+            list->next = newEmptyCardList();
+        }
+        list->card = init_array[i];
+        list = list->next;
+    }
+    return head;
 }
 
 card_list* pushCard(card_list *head, card_s pcard) {
