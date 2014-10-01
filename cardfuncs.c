@@ -66,6 +66,7 @@ card_list* newEmptyCardList(){
         memzero
         return = (card_list*)m;
     */
+    return NULL;
 }
 
 
@@ -78,8 +79,8 @@ card_list* newInitializedCardList(card_s *init_array){
         y = newEmptyCardlist();
         y.card = init_array[x];
         if i == x y->next = NULL
-        
     */
+    return NULL;
 }
 
 card_list* pushCard(card_list *head, card_s pcard) {
@@ -88,12 +89,14 @@ card_list* pushCard(card_list *head, card_s pcard) {
         new->next = oldhead
         new->card = pcard;
     */
+    return NULL;
 }
 
 card_list* popCard(card_list *head, card_s pcard) {
     /* -P-
         return head->next; caller is responsible for freeing pop'd
     */
+    return NULL;
 }
 
 void deleteCardList(card_list *t){
@@ -105,5 +108,5 @@ void deleteCardList(card_list *t){
 }
 
 card_list* find_value_sets(card_list* sorted_cards) {
-
+    return NULL;
 }
