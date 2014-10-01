@@ -27,14 +27,8 @@ bool TEST_parseTwoCharCard_BadInputs() {
             tpayload[1] = thesuits[j];
             
             tdata = parseTwoCharCard(tpayload);
-            if (tdata.value != INVALID_VALUE ) {
-                printf("TEST FAILED: value = %d i = %d payload = %s\n", tdata.value, i, tpayload);
-                return false;
-            }
-            if (tdata.suit != INVALID_SUIT) {
-                printf("TEST FAILED: suit = %d j = %d payload = %s\n", tdata.suit, j, tpayload);
-                return false;
-            }
+            TEST_CHECK(tdata.value == INVALID_VALUE, "value = %d i = %d payload = %s\n", tdata.value, i, tpayload)
+            TEST_CHECK(tdata.suit == INVALID_SUIT, "TEST FAILED: suit = %d j = %d payload = %s\n", tdata.suit, j, tpayload)
         }
     }    
     return true;
@@ -63,14 +57,8 @@ bool TEST_parseTwoCharCard_GoodInputs() {
             tpayload[1] = thesuits[j];
             
             tdata = parseTwoCharCard(tpayload);
-            if (tdata.value != i) {
-                printf("TEST FAILED: value = %d i = %d payload = %s\n", tdata.value, i, tpayload);
-                return false;
-            }
-            if (tdata.suit != j) {
-                printf("TEST FAILED: suit = %d j = %d payload = %s\n", tdata.suit, j, tpayload);
-                return false;
-            }
+            TEST_CHECK(tdata.value == i, "value = %d i = %d payload = %s\n", tdata.value, i, tpayload)
+            TEST_CHECK(tdata.suit == j, "suit = %d j = %d payload = %s\n", tdata.suit, j, tpayload)
         }
     }
     
