@@ -1,7 +1,7 @@
 #ifndef RD_CARDFUNCS_TEST
 #define RD_CARDFUNCS_TEST
 
-#define TEST_CHECK(pred, fmt, ...) if(!(pred)) {printf("TEST FAILED:\t");printf(fmt, ##__VA_ARGS__); return false;}
+#define TEST_CHECK(pred, fmt, ...) if(!(pred)) {printf("TEST FAILED:\t");printf(fmt, ##__VA_ARGS__); putchar('\n');return false;}
 
 bool TEST_parseTwoCharCard_GoodInputs();
 bool TEST_parseTwoCharCard_BadInputs();
