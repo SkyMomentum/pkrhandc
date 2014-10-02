@@ -166,7 +166,6 @@ bool TEST_popCard(){
     TEST_CHECK(target != second, "Second Call did not change the head of the list")
     TEST_CHECK(firsthead != second, "Call did not changed the head of the list to the same pointer as the first call")
     TEST_CHECK(popped.value == QUEEN, "Wrong value: exp %d, recv %d", QUEEN, popped.value)
-
-
+    
     return true;
 }

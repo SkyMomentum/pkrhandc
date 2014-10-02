@@ -4,9 +4,9 @@
 #include <ctype.h>
 
 #include "cardfuncs.h"
-/*
- *  Name: parseTwoCharCard
- *  Arguments: c, an array of two chars.
+/** @brief Parse two chars to a card_s struct.
+ *
+ *  @param c An array of two chars.
  *
  *  Convert the char representing the value of the card to facevalue_t by
  *  converting to int for simple case, or selecting for letters for higher cards.
@@ -61,6 +61,11 @@ card_s parseTwoCharCard(char c[3]){
     return retval;
 }
 
+
+/** @brief Create a new empty card_list struct.
+ *  
+ */
+
 card_list* newEmptyCardList(){
     void *m = NULL;
     
@@ -71,6 +76,12 @@ card_list* newEmptyCardList(){
     return (card_list*)m;
 }
 
+/** @brief Initialize a new card_list by provided an array of card_s.
+ *
+ *  @param init_array An array of two chars.
+ *  @param length The length of the first passed array.
+ *  
+ */
 
 card_list* newInitializedCardList(card_s *init_array, int length){
     int i = 0;
@@ -97,6 +108,13 @@ card_list* newInitializedCardList(card_s *init_array, int length){
     return head;
 }
 
+/** @brief Push a card_s to a card_list stack.
+ *
+ *  @param head The top of a card_list stack.
+ *  @param inputcard The card to be pushed.
+ *  
+ */
+
 card_list* pushCard(card_list *head, card_s inputcard) {
     card_list *newhead = NULL;
     
@@ -111,6 +129,13 @@ card_list* pushCard(card_list *head, card_s inputcard) {
     return newhead;
 }
 
+/** @brief Pop a card_s from a card_list stack.
+ *
+ *  @param head The top of a card_list stack.
+ *  @param ptr_popped A pointer to a card_s to store the card_s popped from the stack.
+ *  
+ */
+
 card_list* popCard(card_list *head, card_s *ptr_popped) {
     card_list *newhead = NULL;
 
@@ -124,6 +149,11 @@ card_list* popCard(card_list *head, card_s *ptr_popped) {
 
     return newhead; 
 }
+
+/** @brief Delete a card_list.
+ *  
+ *  Delete a card_list following the next link in the list until NULL. Which is the empty base case.
+ */
 
 void deleteCardList(card_list *t){
     if (t->next != NULL) {
