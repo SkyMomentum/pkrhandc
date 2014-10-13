@@ -33,8 +33,6 @@ card_stack* newCardStack(card_list *list);
 card_stack* pushCard(card_stack *head, card_t inputcard);
 card_stack* popCard(card_stack *head, card_t *ptr_popped);
 
-card_stack* find_value_sets(card_list* sorted_cards);
-
 card_t parseTwoCharCard(char c[3]);
 
 void printCardStack(card_stack *head);
