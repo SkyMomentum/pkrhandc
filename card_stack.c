@@ -177,9 +177,23 @@ void printCardStack(card_stack *head) {
  *  @param input The string of cards encoded in two char text. Space separated, null terminated.
  */ 
 
-card_list* cardListFromCStr(char *input[]) {
+card_stack* cardStackFromCStr(char *input) {
     char *argStr = NULL;
-    argStr = input;
+    card_list* output = NULL;
+    card_t parsedCard;
+    
+    output = newEmptyCardList();
+    
+    while (input++ != NULL){
+        argStr = input;
+        if (*input == ' '){
+            *input = 0;
+            input++;
+        }
+        parsedCard = parseTwoCharCard(argStr);
+        output = pushCard(output, parsedCard);
+    }
+    return output;
 }
 
 /** @brief Delete a card_list.
@@ -197,4 +211,6 @@ void deleteCardList(card_list *t){
     free(t);
 }
 
-
+card_stack* newCardStack(card_list *list) {
+    return (card_stack*)list;
+}
