@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "card_stack.h"
+#include "cardfuncs.h"
 
 int main(int argc, char **argv) {
     /*  -P-

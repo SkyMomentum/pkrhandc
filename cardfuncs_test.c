@@ -7,8 +7,8 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "card_stack.h"
-#include "card_stack_test.h"
+#include "cardfuncs.h"
+#include "cardfuncs_test.h"
 
 bool TEST_parseTwoCharCard_BadInputs() {
     char thesuits[] = {0, 'x', ' ', 0, '5'};
@@ -28,8 +28,8 @@ bool TEST_parseTwoCharCard_BadInputs() {
             tpayload[1] = thesuits[j];
             
             tdata = parseTwoCharCard(tpayload);
-            TEST_CHECK_VARGS(tdata.value == INVALID_VALUE, "value = %d i = %d payload = %s", tdata.value, i, tpayload)
-            TEST_CHECK_VARGS(tdata.suit == INVALID_SUIT, "TEST FAILED: suit = %d j = %d payload = %s", tdata.suit, j, tpayload)
+            TEST_CHECK(tdata.value == INVALID_VALUE, "value = %d i = %d payload = %s", tdata.value, i, tpayload)
+            TEST_CHECK(tdata.suit == INVALID_SUIT, "TEST FAILED: suit = %d j = %d payload = %s", tdata.suit, j, tpayload)
         }
     }    
     return true;
@@ -58,8 +58,8 @@ bool TEST_parseTwoCharCard_GoodInputs() {
             tpayload[1] = thesuits[j];
             
             tdata = parseTwoCharCard(tpayload);
-            TEST_CHECK_VARGS(tdata.value == i, "value = %d i = %d payload = %s", tdata.value, i, tpayload)
-            TEST_CHECK_VARGS(tdata.suit == j, "suit = %d j = %d payload = %s", tdata.suit, j, tpayload)
+            TEST_CHECK(tdata.value == i, "value = %d i = %d payload = %s", tdata.value, i, tpayload)
+            TEST_CHECK(tdata.suit == j, "suit = %d j = %d payload = %s", tdata.suit, j, tpayload)
         }
     }
     
@@ -71,8 +71,8 @@ bool TEST_newEmptyCardList(){
     card_list *p = NULL;
     p = newEmptyCardList();
     if (p){
-        TEST_CHECK_VARGS(p->card.value == NULL_VALUE, "Wrong value: exp %d, recv %d", INVALID_VALUE, p->card.value)
-        TEST_CHECK_VARGS(p->card.suit == INVALID_SUIT, "Wrong value: exp %d, recv %d", INVALID_SUIT, p->card.value)
+        TEST_CHECK(p->card.value == NULL_VALUE, "Wrong value: exp %d, recv %d", INVALID_VALUE, p->card.value)
+        TEST_CHECK(p->card.suit == INVALID_SUIT, "Wrong value: exp %d, recv %d", INVALID_SUIT, p->card.value)
     }
     return true;
 }
@@ -90,12 +90,12 @@ bool TEST_newInitializedCardList(){
     memset(&testdata[8], 0, sizeof(card_s)); //null terminator
         
     result = newInitializedCardList(testdata, 7);
-    TEST_CHECK_FIXED(result != NULL, "Received NULL ptr from function newInitializedCardList()")
-    TEST_CHECK_FIXED(result->card.suit == HEART, "Initialized to wrong suit")
+    TEST_CHECK(result != NULL, "Recieved NULL ptr from function newInitializedCardList()")
+    TEST_CHECK(result->card.suit == HEART, "Initialized to wrong suit")
     
     i = 0;
     while(result->next != NULL) {
-        TEST_CHECK_VARGS(result->card.value == i + 4, "Wrong value: exp %d, recv %d", i + 4, result->card.value)
+        TEST_CHECK(result->card.value == i + 4, "Wrong value: exp %d, recv %d", i + 4, result->card.value)
         i++;
         result = result->next;
     }
@@ -108,7 +108,7 @@ bool TEST_deleteCardList(){
     card_list *x = NULL;
     x = newEmptyCardList();
     deleteCardList(x);
-    return true;
+    return true; 
 }
 
 bool TEST_pushCard(){
@@ -124,17 +124,18 @@ bool TEST_pushCard(){
     
     firsthead = newEmptyCardList();
     target = firsthead;
-    TEST_CHECK_FIXED(target != NULL, "Received NULL ptr from function newEmptyCardList()")
+    TEST_CHECK(target != NULL, "Recieved NULL ptr from function newEmptyCardList()")
 
     target = pushCard(target, a);
-    TEST_CHECK_FIXED(target != NULL, "Call returned a null")
-    TEST_CHECK_FIXED(target != firsthead, "Call did not change the head of the list")
-    TEST_CHECK_VARGS(target->card.value == QUEEN, "Wrong value: exp %d, recv %d", QUEEN, target->card.value)
+    TEST_CHECK(target != NULL, "Call returned a null")
+    TEST_CHECK(target != firsthead, "Call did not change the head of the list")
+    TEST_CHECK(target->card.value == QUEEN, "Wrong value: exp %d, recv %d", QUEEN, target->card.value)
     
     second = target;
     target = pushCard(target, b);
-    TEST_CHECK_FIXED(target != second, "Second call did not change the head of the list")
-    TEST_CHECK_VARGS(target->card.value == ACE, "Wrong value: exp %d, recv %d", ACE, target->card.value)
+    TEST_CHECK(target != second, "Second call did not change the head of the list")
+    TEST_CHECK(target->card.value == ACE, "Wrong value: exp %d, recv %d", ACE, target->card.value)
+
 
     return true;
 }
@@ -153,18 +154,18 @@ bool TEST_popCard(){
     target = newEmptyCardList();
     target = pushCard(target, a);
     target = pushCard(target, b);    
-    TEST_CHECK_FIXED(target != NULL, "Received NULL ptr from function after setup attempt")
+    TEST_CHECK(target != NULL, "Recieved NULL ptr from function after setup attempt")
     
     firsthead = target;
     target = popCard(target, &popped);
-    TEST_CHECK_VARGS(popped.value == ACE, "Wrong value: exp %d, recv %d", ACE, popped.value)
-    TEST_CHECK_FIXED(target != firsthead, "First Call did not change the head of the list")
+    TEST_CHECK(popped.value == ACE, "Wrong value: exp %d, recv %d", ACE, popped.value)
+    TEST_CHECK(target != firsthead, "First Call did not change the head of the list")
     
     second = target;
     target = popCard(target, &popped);
-    TEST_CHECK_FIXED(target != second, "Second Call did not change the head of the list")
-    TEST_CHECK_FIXED(firsthead != second, "Call did not change the head of the list to the same pointer as the first call")
-    TEST_CHECK_VARGS(popped.value == QUEEN, "Wrong value: exp %d, recv %d", QUEEN, popped.value)
+    TEST_CHECK(target != second, "Second Call did not change the head of the list")
+    TEST_CHECK(firsthead != second, "Call did not changed the head of the list to the same pointer as the first call")
+    TEST_CHECK(popped.value == QUEEN, "Wrong value: exp %d, recv %d", QUEEN, popped.value)
     
     return true;
 }
