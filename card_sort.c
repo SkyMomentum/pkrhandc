@@ -1,4 +1,3 @@
-
 #include "card_stack.h"
 
 /** @brief Sort in place of a card_list.

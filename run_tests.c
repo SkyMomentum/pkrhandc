@@ -21,5 +21,8 @@ int main() {
     TEST_newInitializedCardList();
     TEST_pushCard();
     TEST_popCard();
+    
+    TEST_sortInputHand();
+    TEST_mergesortCardLists();
     return 0;
 }
