@@ -11,7 +11,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-#include "cardfuncs_test.h"
+#include "card_stack_test.h"
 
 int main() {
     /* TODO: Keep track of the results */

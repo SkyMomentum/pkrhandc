@@ -3,7 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "cardfuncs.h"
+#include "card_stack.h"
+
 /** @brief Parse two chars to a card_s struct.
  *
  *  @param c An array of two chars.
@@ -115,7 +116,7 @@ card_list* newInitializedCardList(card_s *init_array, int length){
  *  
  */
 
-card_list* pushCard(card_list *head, card_s inputcard) {
+card_stack* pushCard(card_stack *head, card_s inputcard) {
     card_list *newhead = NULL;
     
     if (head == NULL) return NULL;
@@ -136,7 +137,7 @@ card_list* pushCard(card_list *head, card_s inputcard) {
  *  
  */
 
-card_list* popCard(card_list *head, card_s *ptr_popped) {
+card_stack* popCard(card_stack *head, card_s *ptr_popped) {
     card_list *newhead = NULL;
 
     if (head == NULL) return NULL;
@@ -152,7 +153,10 @@ card_list* popCard(card_list *head, card_s *ptr_popped) {
 
 /** @brief Delete a card_list.
  *  
- *  Delete a card_list following the next link in the list until NULL. Which is the empty base case.
+ *  Delete a card_list following the next link in the list until NULL. Which is the
+ *  empty base case. This should fail spectacularly so there is no test case.
+ *  
+ *  TODO: Decide if I care about long lists and how this will fail spectacularly.
  */
 
 void deleteCardList(card_list *t){
@@ -164,4 +168,8 @@ void deleteCardList(card_list *t){
 
 card_list* find_value_sets(card_list* sorted_cards) {
     return NULL;
+}
+
+card_stack* newCardStack(card_list *list) {
+    return (card_stack*)list;
 }
