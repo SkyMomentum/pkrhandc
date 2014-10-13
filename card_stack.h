@@ -1,5 +1,5 @@
-#ifndef RD_CARDFUNCS
-#define RD_CARDFUNCS
+#ifndef RD_CARD_STACK
+#define RD_CARD_STACK
 
 typedef enum {
     INVALID_SUIT = 0, HEART, DIAMOND, CLUB, SPADE
@@ -14,21 +14,24 @@ typedef struct {
     suit_t suit;
 } card_s;
 
-
 typedef struct card_list{
     card_s card;
     struct card_list* next;
 } card_list;
 
+typedef struct card_list card_stack;
+
 card_list* newEmptyCardList();
 card_list* newInitializedCardList(card_s *init_array, int length);
 void deleteCardList(card_list *t);
 
-card_list* pushCard(card_list *head, card_s inputcard);
-card_list* popCard(card_list *head, card_s *ptr_popped);
+card_stack* newCardStack(card_list *list);
 
-card_list* find_value_sets(card_list* sorted_cards);
+card_stack* pushCard(card_stack *head, card_s inputcard);
+card_stack* popCard(card_stack *head, card_s *ptr_popped);
+
+card_stack* find_value_sets(card_list* sorted_cards);
 
 card_s parseTwoCharCard(char c[3]);
 
-#endif // RD_CARDFUNCS
+#endif // RD_CARD_STACK
