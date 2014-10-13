@@ -9,7 +9,7 @@ const char suitToCharTable[] = {0, 'H', 'D', 'C', 'S'};
 const char faceToCharTable[] = {0, 0, '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
 
 
-/** @brief Parse two chars to a card_s struct.
+/** @brief Parse two chars to a card_t struct.
  *
  *  @param c An array of two chars.
  *
@@ -18,8 +18,8 @@ const char faceToCharTable[] = {0, 0, '2', '3', '4', '5', '6', '7', '8', '9', 'T
  *  The default case in the switch having eliminated all valid options sets 
  *  an error state.
  */
-card_s parseTwoCharCard(char c[3]){
-    card_s retval;
+card_t parseTwoCharCard(char c[3]){
+    card_t retval;
     int value = 0;
 
     char valuestr[2] = {c[0], 0};
@@ -81,14 +81,14 @@ card_list* newEmptyCardList(){
     return (card_list*)m;
 }
 
-/** @brief Initialize a new card_list by provided an array of card_s.
+/** @brief Initialize a new card_list by provided an array of card_t.
  *
  *  @param init_array An array of two chars.
  *  @param length The length of the first passed array.
  *  
  */
 
-card_list* newInitializedCardList(card_s *init_array, int length){
+card_list* newInitializedCardList(card_t *init_array, int length){
     int i = 0;
     card_list *list = NULL, *head = NULL;
     
@@ -113,14 +113,14 @@ card_list* newInitializedCardList(card_s *init_array, int length){
     return head;
 }
 
-/** @brief Push a card_s to a card_list stack.
+/** @brief Push a card_t to a card_list stack.
  *
  *  @param head The top of a card_list stack.
  *  @param inputcard The card to be pushed.
  *  
  */
 
-card_stack* pushCard(card_stack *head, card_s inputcard) {
+card_stack* pushCard(card_stack *head, card_t inputcard) {
     card_list *newhead = NULL;
     
     if (head == NULL) return NULL;
@@ -134,14 +134,14 @@ card_stack* pushCard(card_stack *head, card_s inputcard) {
     return newhead;
 }
 
-/** @brief Pop a card_s from a card_list stack.
+/** @brief Pop a card_t from a card_list stack.
  *
  *  @param head The top of a card_list stack.
- *  @param ptr_popped A pointer to a card_s to store the card_s popped from the stack.
+ *  @param ptr_popped A pointer to a card_t to store the card_t popped from the stack.
  *  
  */
 
-card_stack* popCard(card_stack *head, card_s *ptr_popped) {
+card_stack* popCard(card_stack *head, card_t *ptr_popped) {
     card_list *newhead = NULL;
 
     if (head == NULL) return NULL;

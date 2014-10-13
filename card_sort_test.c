@@ -22,7 +22,7 @@ bool TEST_mergesortCardLists() {
     int i = 0;
     
     card_stack *lhead = NULL, *rhead = NULL, *rethead = NULL, *working = NULL;
-    card_s parsedCard;
+    card_t parsedCard;
     
     lhead = newEmptyCardList();
     rhead = newEmptyCardList();
@@ -38,12 +38,12 @@ bool TEST_mergesortCardLists() {
         parsedCard = parseTwoCharCard(cardString);
         rhead = pushCard(rhead, parsedCard);
     }
-    printCardStack(lhead);
-    putchar('\n');
-    printCardStack(rhead);
-    putchar('\n');
+    //putchar('\t'); printCardStack(lhead); putchar('\n');
+    //putchar('\t'); printCardStack(rhead); putchar('\n');
+    
     rethead = mergesortCardLists(lhead, rhead);
-    printCardStack(rethead);
+    //putchar('\t'); printCardStack(rethead); putchar('\n');
+    
     TEST_CHECK_FIXED( ((rethead == lhead) || (rethead == rhead)), "Head of returned sorted list did not match either supplied head")
 
     working = rethead;

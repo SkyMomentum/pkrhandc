@@ -14,7 +14,7 @@ bool TEST_parseTwoCharCard_BadInputs() {
     char thesuits[] = {0, 'x', ' ', 0, '5'};
     char thefaces[] = {0, '$', 'x', 'Z', 10};
     int i = 0, j = 0;
-    card_s tdata;
+    card_t tdata;
     char tpayload[3] = {0,0,0};
     
     printf("TEST_parseTwoCharCard_BadInputs()\n");
@@ -40,7 +40,7 @@ bool TEST_parseTwoCharCard_GoodInputs() {
     char thesuits[] = {0, 'H', 'd', 'c', 'S'};
     char thefaces[] = {'T', 'J', 'Q', 'K', 'A'};
     int i = 0, j = 0;
-    card_s tdata;
+    card_t tdata;
     char tpayload[3] = {0,0,0};
     
     printf("TEST_parseTwoCharCard_GoodInputs()\n");
@@ -80,14 +80,14 @@ bool TEST_newEmptyCardList(){
 bool TEST_newInitializedCardList(){
     printf("TEST_newInitializedCardList()\n");
     int i = 0;
-    card_s testdata[8];
+    card_t testdata[8];
     card_list *result = NULL;
     
     for(i=0; i < 8; i++){
         testdata[i].value = i + 4; //middle values
         testdata[i].suit = HEART;
     }
-    memset(&testdata[8], 0, sizeof(card_s)); //null terminator
+    memset(&testdata[8], 0, sizeof(card_t)); //null terminator
         
     result = newInitializedCardList(testdata, 7);
     TEST_CHECK_FIXED(result != NULL, "Received NULL ptr from function newInitializedCardList()")
@@ -113,7 +113,7 @@ bool TEST_deleteCardList(){
 
 bool TEST_pushCard(){
     printf("TEST_pushCard()\n");
-    card_s a, b;
+    card_t a, b;
     card_list *firsthead = NULL, *second = NULL, *target = NULL;
     
     a.value = QUEEN;
@@ -141,7 +141,7 @@ bool TEST_pushCard(){
 
 bool TEST_popCard(){
     printf("TEST_popCard()\n");
-    card_s a, b, popped;
+    card_t a, b, popped;
     card_list *firsthead = NULL, *second = NULL, *target = NULL ;
     
     a.value = QUEEN;
