@@ -40,16 +40,17 @@ card_list* mergesortCardLists(card_list *left, card_list *right) {
     workingend = rethead;
 
     while(workingend != NULL) {
-        if ( left == NULL || right == NULL) break;
-        //printf("VALUE A = %d, VALUE B = %d\n", left->card.value, right->card.value);
+        if ( left->card.value == NULL_VALUE || right->card.value == NULL_VALUE ) break;
+        printf("VALUE A = %d, VALUE B = %d\n", left->card.value, right->card.value);
         if (left->card.value > right->card.value) {
             workingend->next = left;
-            left = popCard(left, NULL);
+            left = left->next;
         } else {
             workingend->next = right;
-            right = popCard(right, NULL);
+            right = right->next;
         }
         workingend = workingend->next;
     }
+    workingend->next = NULL;
     return rethead;
 }

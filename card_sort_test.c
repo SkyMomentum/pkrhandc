@@ -16,7 +16,7 @@ bool TEST_mergesortCardLists() {
     
     char thesuits[] = {'H', 'S', 'D', 'C', 'H'};
     char leftfaces[] = {'2', '4', '6', '8', 'T'};
-    char rightfaces[] = {'A', '3', '5', '7', '9'};
+    char rightfaces[] = {'3', '5', '7', '9', 'A'};
     char cardString[3] = {0,0,0};
     
     int i = 0;
@@ -43,7 +43,7 @@ bool TEST_mergesortCardLists() {
     printCardStack(rhead);
     putchar('\n');
     rethead = mergesortCardLists(lhead, rhead);
-    
+    printCardStack(rethead);
     TEST_CHECK_FIXED( ((rethead == lhead) || (rethead == rhead)), "Head of returned sorted list did not match either supplied head")
 
     working = rethead;
@@ -54,6 +54,6 @@ bool TEST_mergesortCardLists() {
             working->card.value , working->next->card.value
         )
     }
-    
+
     return false;
 }
