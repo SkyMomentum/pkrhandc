@@ -29,22 +29,23 @@ bool TEST_mergesortCardLists() {
     
     for (i = 0; i <5; i++){
         cardString[0] = leftfaces[i];
-        cardString[0] = thesuits[i];
+        cardString[1] = thesuits[i];
         parsedCard = parseTwoCharCard(cardString);
         lhead = pushCard(lhead, parsedCard);
         
         cardString[0] = rightfaces[i];
-        cardString[0] = thesuits[4-i];
+        cardString[1] = thesuits[4-i];
         parsedCard = parseTwoCharCard(cardString);
         rhead = pushCard(rhead, parsedCard);
     }
-    
+
     rethead = mergesortCardLists(lhead, rhead);
     
     TEST_CHECK_FIXED( ((rethead == lhead) || (rethead == rhead)), "Head of returned sorted list did not match either supplied head")
 
     working = rethead;
     for (i = 0; i <10; i++){
+
         TEST_CHECK_VARGS( 
             (working->card.value > working->next->card.value),
             "Values are not in sequence, %d - %d",

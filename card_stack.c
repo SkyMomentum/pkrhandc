@@ -142,8 +142,10 @@ card_stack* popCard(card_stack *head, card_s *ptr_popped) {
 
     if (head == NULL) return NULL;
     
-    ptr_popped->value = head->card.value;
-    ptr_popped->suit = head->card.suit;
+    if (ptr_popped != NULL) {
+        ptr_popped->value = head->card.value;
+        ptr_popped->suit = head->card.suit;
+    }
 
     newhead = head->next;
     free(head);    

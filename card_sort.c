@@ -26,14 +26,30 @@ card_list* sortInputHand(card_list *input_cards) {
  */
 
 card_list* mergesortCardLists(card_list *left, card_list *right) {
-    //  card_list *rethead, *workingend;
-    //  if a->card.value > b->card.value then rethead = a, pop left
-    //  else rethead = b, pop right
-    //  workingend = rethead;
+    card_list *rethead = NULL, *workingend = NULL;
     
-    //  for each element in a
-    //      if a->card.value > b->card.value then head->next = a, pop left
-    //      else head->next = b, pop right
-    //      workingend = workingend->next
-    return NULL;
+    if( left == NULL || right == NULL) return NULL;
+
+    if(left->card.value > right->card.value) {
+        rethead = left;
+        left = popCard(left, NULL);
+    } else {
+        rethead = right;
+        right = popCard(right, NULL);
+    }
+    workingend = rethead;
+
+    while(workingend != NULL) {
+        if ( left == NULL || right == NULL) break;
+        //printf("VALUE A = %d, VALUE B = %d\n", left->card.value, right->card.value);
+        if (left->card.value > right->card.value) {
+            workingend->next = left;
+            left = popCard(left, NULL);
+        } else {
+            workingend->next = right;
+            right = popCard(right, NULL);
+        }
+        workingend = workingend->next;
+    }
+    return rethead;
 }
