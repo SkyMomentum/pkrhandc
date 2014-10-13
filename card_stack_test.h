@@ -17,4 +17,6 @@ bool TEST_popCard();
 bool TEST_sortInputHand();
 bool TEST_mergesortCardLists();
 
+bool TEST_cardStackFromCStr();
+
 #endif // RD_CARD_STACK_TEST

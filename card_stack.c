@@ -184,11 +184,11 @@ card_stack* cardStackFromCStr(char *input) {
     
     output = newEmptyCardList();
     
-    while (input++ != NULL){
-        argStr = input;
-        if (*input == ' '){
-            *input = 0;
-            input++;
+    while (*(input++) != NULL){
+        argStr = input++;
+        if (*(argStr + 2) == ' '){
+            *(argStr + 2) = 0;
+            input = argStr + 3;
         }
         parsedCard = parseTwoCharCard(argStr);
         output = pushCard(output, parsedCard);

@@ -24,5 +24,8 @@ int main() {
     
     TEST_sortInputHand();
     TEST_mergesortCardLists();
+    
+    TEST_cardStackFromCStr();
+    
     return 0;
 }

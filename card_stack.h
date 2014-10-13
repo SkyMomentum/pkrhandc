@@ -36,5 +36,6 @@ card_stack* popCard(card_stack *head, card_t *ptr_popped);
 card_t parseTwoCharCard(char c[3]);
 
 void printCardStack(card_stack *head);
+card_stack* cardStackFromCStr(char *input);
 
 #endif // RD_CARD_STACK
