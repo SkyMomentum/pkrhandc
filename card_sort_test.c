@@ -55,5 +55,6 @@ bool TEST_mergesortCardLists() {
         )
     }
 
-    return false;
+    return true;
 }
+
