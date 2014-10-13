@@ -195,7 +195,7 @@ card_stack* cardStackFromCStr(char *input) {
         parsedCard = parseTwoCharCard(argStr);
         /* Check for error state after parsing attempt. pushCard() if not. */
         if ((parsedCard.value != NULL_VALUE) &&
-            (parsedCard.suit != NULL_SUIT) &&
+            (parsedCard.value != INVALID_VALUE) &&
             (parsedCard.suit != INVALID_SUIT)) {
                 output = pushCard(output, parsedCard);
             }
