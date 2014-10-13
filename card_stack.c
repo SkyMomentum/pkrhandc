@@ -172,16 +172,6 @@ void printCardStack(card_stack *head) {
     }
 }
 
-/** @brief Construct a new card_list from a C string.
- *  
- *  @param input The string of cards encoded in two char text. Space separated, null terminated.
- */ 
-
-card_list* cardListFromCStr(char *input[]) {
-    char *argStr = NULL;
-    argStr = input;
-}
-
 /** @brief Delete a card_list.
  *  
  *  Delete a card_list following the next link in the list until NULL. Which is the
@@ -197,4 +187,10 @@ void deleteCardList(card_list *t){
     free(t);
 }
 
+card_list* find_value_sets(card_list* sorted_cards) {
+    return NULL;
+}
 
+card_stack* newCardStack(card_list *list) {
+    return (card_stack*)list;
+}

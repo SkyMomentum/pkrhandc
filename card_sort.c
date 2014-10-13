@@ -54,11 +54,3 @@ card_list* mergesortCardLists(card_list *left, card_list *right) {
     workingend->next = NULL;
     return rethead;
 }
-
-card_list* find_value_sets(card_list* sorted_cards) {
-    return NULL;
-}
-
-card_stack* newCardStack(card_list *list) {
-    return (card_stack*)list;
-}
