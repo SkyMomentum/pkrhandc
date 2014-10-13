@@ -38,14 +38,16 @@ bool TEST_mergesortCardLists() {
         parsedCard = parseTwoCharCard(cardString);
         rhead = pushCard(rhead, parsedCard);
     }
-
+    printCardStack(lhead);
+    putchar('\n');
+    printCardStack(rhead);
+    putchar('\n');
     rethead = mergesortCardLists(lhead, rhead);
     
     TEST_CHECK_FIXED( ((rethead == lhead) || (rethead == rhead)), "Head of returned sorted list did not match either supplied head")
 
     working = rethead;
     for (i = 0; i <10; i++){
-
         TEST_CHECK_VARGS( 
             (working->card.value > working->next->card.value),
             "Values are not in sequence, %d - %d",

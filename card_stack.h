@@ -9,6 +9,9 @@ typedef enum {
     NULL_VALUE = 0, INVALID_VALUE = 1, TWO = 2, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 } facevalue_t;
 
+extern const char suitToCharTable[];
+extern const char faceToCharTable[];
+
 typedef struct {
     facevalue_t value;
     suit_t suit;
@@ -33,5 +36,7 @@ card_stack* popCard(card_stack *head, card_s *ptr_popped);
 card_stack* find_value_sets(card_list* sorted_cards);
 
 card_s parseTwoCharCard(char c[3]);
+
+void printCardStack(card_stack *head);
 
 #endif // RD_CARD_STACK

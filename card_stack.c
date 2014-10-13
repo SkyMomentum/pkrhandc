@@ -5,6 +5,10 @@
 
 #include "card_stack.h"
 
+const char suitToCharTable[] = {0, 'H', 'D', 'C', 'S'};
+const char faceToCharTable[] = {0, 0, '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
+
+
 /** @brief Parse two chars to a card_s struct.
  *
  *  @param c An array of two chars.
@@ -151,6 +155,21 @@ card_stack* popCard(card_stack *head, card_s *ptr_popped) {
     free(head);    
 
     return newhead; 
+}
+
+/** @brief Print a card_stack to stdio in the same format as input.
+ *  
+ *  @param head A pointer to the head of a list to be printed.
+ *  
+ */
+
+void printCardStack(card_stack *head) {
+    while (head != NULL) {
+        putchar(faceToCharTable[head->card.value]);
+        putchar(suitToCharTable[head->card.suit]);
+        putchar(' ');
+        head = head->next;
+    }
 }
 
 /** @brief Delete a card_list.
