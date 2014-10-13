@@ -29,7 +29,7 @@ bool TEST_parseTwoCharCard_BadInputs() {
             
             tdata = parseTwoCharCard(tpayload);
             TEST_CHECK_VARGS(tdata.value == INVALID_VALUE, "value = %d i = %d payload = %s", tdata.value, i, tpayload)
-            TEST_CHECK_VARGS(tdata.suit == INVALID_SUIT, "TEST FAILED: suit = %d j = %d payload = %s", tdata.suit, j, tpayload)
+            TEST_CHECK_VARGS(tdata.suit == INVALID_SUIT, "suit = %d j = %d payload = %s", tdata.suit, j, tpayload)
         }
     }    
     return true;
