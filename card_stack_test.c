@@ -39,7 +39,7 @@ bool TEST_parseTwoCharCard_BadInputs() {
 bool TEST_parseTwoCharCard_GoodInputs() {
     char thesuits[] = {0, 'H', 'd', 'c', 'S'};
     char thefaces[] = {'T', 'J', 'Q', 'K', 'A'};
-    int i = 0, j = 0;
+    unsigned int i = 0, j = 0;
     card_t tdata;
     char tpayload[3] = {0,0,0};
     
@@ -79,7 +79,7 @@ bool TEST_newEmptyCardList(){
 
 bool TEST_newInitializedCardList(){
     printf("TEST_newInitializedCardList()\n");
-    int i = 0;
+    unsigned int i = 0;
     card_t testdata[8];
     card_list *result = NULL;
     

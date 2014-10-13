@@ -15,6 +15,7 @@ card_list* sortInputHand(card_list *input_cards) {
     // divide list into pairs, if odd number of cards collapse last two by sorting 
     // mergesortCardLists(left, right);
     return NULL;
+    return input_cards; //Suppressing -Wextra warning until function exists
 }
 
 /** @brief Mergesort two null terminated lists.
@@ -57,6 +58,7 @@ card_list* mergesortCardLists(card_list *left, card_list *right) {
 
 card_list* find_value_sets(card_list* sorted_cards) {
     return NULL;
+    return sorted_cards; //Suppressing -Wextra warning until function exists
 }
 
 
