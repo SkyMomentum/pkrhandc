@@ -186,12 +186,19 @@ card_stack* cardStackFromCStr(char *input) {
     
     while (*(input++) != NULL){
         argStr = input++;
+        /* Look ahead 2 chars, if it's a space null it out and move the input pointer for the next pass. */
         if (*(argStr + 2) == ' '){
             *(argStr + 2) = 0;
             input = argStr + 3;
         }
+        
         parsedCard = parseTwoCharCard(argStr);
-        output = pushCard(output, parsedCard);
+        /* Check for error state after parsing attempt. pushCard() if not. */
+        if ((parsedCard.value != NULL_VALUE) &&
+            (parsedCard.suit != NULL_SUIT) &&
+            (parsedCard.suit != INVALID_SUIT)) {
+                output = pushCard(output, parsedCard);
+            }
     }
     return output;
 }
