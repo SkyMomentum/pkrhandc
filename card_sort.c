@@ -16,7 +16,7 @@
 card_list* sortInputHand(card_list *input_cards) {
     // simple count first
     int count = 0, passcount = 0;
-    int i = 0;
+    //int i = 0;
     card_list *headCard = NULL, *nextCard = NULL, *listIterator = NULL;
     headCard = input_cards;
     
@@ -62,10 +62,10 @@ card_list* sortInputHand(card_list *input_cards) {
      *          thiscount++
      *  end loop because mergesort did the final left and right
      */
-    for (i = 0; i < passcount; i++) {
+    /*for (i = 0; i < passcount; i++) {
         *(arrayOfPtrInputCards + i) = headCard;
         headCard = headCard->next;
-    }
+    }*/
 
     return NULL;
 }
@@ -76,6 +76,7 @@ card_list* sortInputHand(card_list *input_cards) {
  *  @param right A pointer to the head of the second list.
  *  
  *  Both lists must be sorted if either is longer than a single element.
+ *  This function treats the card_list as a queue.
  */
 
 card_list* mergesortCardLists(card_list *left, card_list *right) {
@@ -83,6 +84,8 @@ card_list* mergesortCardLists(card_list *left, card_list *right) {
     
     if( left == NULL || right == NULL) return NULL;
 
+    // Take the higher valued side and make it the first card in the return list.
+    // Then advance the relevant argument pointer down the list.
     if(left->card.value > right->card.value) {
         rethead = left;
         left = left->next;
@@ -90,23 +93,31 @@ card_list* mergesortCardLists(card_list *left, card_list *right) {
         rethead = right;
         right = right->next;
     }
+    // Start and end of the new list.
     workingend = rethead;
     
+    
     while(workingend != NULL) {
+        // Check that either list has reached its end. One clause each.
+        // If it has, add the other remaining other list as the ->next of the working list.
         if(left == NULL) {
             workingend->next = right;
             right->next = NULL;
         } else if (right == NULL) {
             workingend->next = left;
             left->next = NULL;
-        } else if ( left->card.value == NULL_VALUE || right->card.value == NULL_VALUE ) { 
-            break; 
-        } else if (left->card.value > right->card.value) {
-            workingend->next = left;
-            left = left->next;
+        // Not at the end so... 
         } else {
-            workingend->next = right;
-            right = right->next;
+            // Bail out on an error condition.
+            if ( left->card.value == NULL_VALUE || right->card.value == NULL_VALUE ){break;}
+            // Select for greater value then advance list pointer.
+            if (left->card.value > right->card.value) {
+                workingend->next = left;
+                left = left->next;
+            } else {
+                workingend->next = right;
+                right = right->next;
+            }
         }
         workingend = workingend->next;
     }
