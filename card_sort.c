@@ -1,7 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 
 #include "card_stack.h"
+#include "card_sort.h"
 
 /** @brief Sort in place of a card_list.
  *
@@ -12,10 +15,59 @@
  
 card_list* sortInputHand(card_list *input_cards) {
     // simple count first
-    // divide list into pairs, if odd number of cards collapse last two by sorting 
-    // mergesortCardLists(left, right);
+    int count = 0, passcount = 0;
+    int i = 0;
+    card_list *headCard = NULL, *nextCard = NULL, *listIterator = NULL;
+    headCard = input_cards;
+    
+    while (headCard != NULL) {
+        count++;
+        headCard = headCard->next;
+    }
+    
+    listIterator = headCard = input_cards;
+
+    card_list **arrayOfPartialSorts = malloc(sizeof(card_list*) * ((count/2) +1));
+    
+    // Prep pass
+    while (listIterator != NULL) {
+        // take two from input, sort them, put that list into next arrayOfPartialSorts
+        // headcard is set to listIterator, which is initially the argument input_cards
+        // and subsequently updated on each loop
+        headCard = listIterator;
+        
+        // Check there are two cards, existence of the first checked by the while loop
+        if ( listIterator->next != NULL ){
+            //Save pointers to ->next elements then NULL them on the working elements
+            nextCard = headCard->next; 
+            headCard->next = NULL;
+            listIterator = nextCard->next;
+            nextCard->next = NULL;
+            arrayOfPartialSorts[passcount] = mergesortCardLists( headCard, nextCard );
+        } else {
+            listIterator = NULL;
+            // TODO: The work, dropping the last card if odd because lazy
+            //merge with the last partial sort
+            
+        }
+        passcount++;
+    }
+    
+    //Forward run over partial sorts, merge sort adjacent items
+    /*  -P-
+     *  while thiscount > 1
+     *      thiscount = 0
+     *      loop the partials
+     *          mergesorting
+     *          thiscount++
+     *  end loop because mergesort did the final left and right
+     */
+    for (i = 0; i < passcount; i++) {
+        *(arrayOfPtrInputCards + i) = headCard;
+        headCard = headCard->next;
+    }
+
     return NULL;
-    return input_cards; //Suppressing -Wextra warning until function exists
 }
 
 /** @brief Mergesort two null terminated lists.
@@ -39,11 +91,17 @@ card_list* mergesortCardLists(card_list *left, card_list *right) {
         right = right->next;
     }
     workingend = rethead;
-
+    
     while(workingend != NULL) {
-        if ( left->card.value == NULL_VALUE || right->card.value == NULL_VALUE ) break;
-        //printf("VALUE A = %d, VALUE B = %d\n", left->card.value, right->card.value);
-        if (left->card.value > right->card.value) {
+        if(left == NULL) {
+            workingend->next = right;
+            right->next = NULL;
+        } else if (right == NULL) {
+            workingend->next = left;
+            left->next = NULL;
+        } else if ( left->card.value == NULL_VALUE || right->card.value == NULL_VALUE ) { 
+            break; 
+        } else if (left->card.value > right->card.value) {
             workingend->next = left;
             left = left->next;
         } else {
@@ -52,7 +110,7 @@ card_list* mergesortCardLists(card_list *left, card_list *right) {
         }
         workingend = workingend->next;
     }
-    workingend->next = NULL;
+
     return rethead;
 }
 
