@@ -172,7 +172,7 @@ bool TEST_popCard(){
 bool TEST_cardStackFromCStr() {
     printf("TEST_cardStackFromCStr()\n");
     char payload[] = "AH AS AD AC 2H 2C";
-    cardStackFromCStr(payload);
+    printCardStack(cardStackFromCStr(payload));
     
     return true;
 }

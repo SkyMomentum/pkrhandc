@@ -178,26 +178,38 @@ void printCardStack(card_stack *head) {
  */ 
 
 card_stack* cardStackFromCStr(char *input) {
-    char *argStr = NULL;
+    char *argStr = NULL, *endPtr = NULL;
     card_list* output = NULL;
     card_t parsedCard;
     
     output = newEmptyCardList();
     
-    while (*(input++) != NULL){
-        argStr = input++;
-        /* Look ahead 2 chars, if it's a space null it out and move the input pointer for the next pass. */
-        if (*(argStr + 2) == ' '){
-            *(argStr + 2) = 0;
-            input = argStr + 3;
+    int cnt = 0;
+    
+    while (*(input + cnt) != NULL){
+        cnt++;
+    }
+    endPtr = input + cnt;
+
+    while (endPtr > input) {
+        argStr = endPtr - 2;
+        /*  Look back 2 chars from the end, if it's a space 
+         *  null it out and move the input pointer for the next pass.
+         */
+        if (*(endPtr - 3) == ' '){
+            *(endPtr - 3) = 0;
         }
-        
+        endPtr -= 3;
+        *(argStr + 2) = 0;//ensure the null
         parsedCard = parseTwoCharCard(argStr);
         /* Check for error state after parsing attempt. pushCard() if not. */
         if ((parsedCard.value != NULL_VALUE) &&
             (parsedCard.value != INVALID_VALUE) &&
             (parsedCard.suit != INVALID_SUIT)) {
                 output = pushCard(output, parsedCard);
+            } else {
+                deleteCardList(output);
+                return NULL;
             }
     }
     return output;
