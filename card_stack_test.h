@@ -19,4 +19,6 @@ bool TEST_mergesortCardLists();
 
 bool TEST_cardStackFromCStr();
 
+bool TEST_concatCardLists();
+
 #endif // RD_CARD_STACK_TEST

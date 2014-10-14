@@ -38,4 +38,6 @@ card_t parseTwoCharCard(char c[3]);
 void printCardStack(card_stack *head);
 card_stack* cardStackFromCStr(char *input);
 
+card_list* concatCardLists(card_list *first, card_list *second);
+
 #endif // RD_CARD_STACK

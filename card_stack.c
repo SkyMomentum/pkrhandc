@@ -215,6 +215,28 @@ card_stack* cardStackFromCStr(char *input) {
     return output;
 }
 
+/** @brief Concatenate two card_lists
+ *  
+ *  @param first A pointer to the head of the first list.
+ *  @param second A pointer to the head of the other list.
+ *  
+ *  Join two card_lists by iterating down the first then set the last elements 
+ *  next pointer to the head of the second list.
+ */
+ 
+card_list* concatCardLists(card_list *first, card_list *second){
+    card_list *iter = first;
+    if (first == NULL || second == NULL) return NULL;
+    
+    while(iter->next != NULL) {
+        iter = iter->next;
+    }
+    
+    iter->next = second;
+    
+    return first;    
+}
+
 /** @brief Delete a card_list.
  *  
  *  Delete a card_list following the next link in the list until NULL. Which is the
