@@ -8,9 +8,16 @@
 
 bool TEST_sortInputHand() {
     printf("TEST_sortInputHand()\n");
+    
     char cards[] = "TD 6D 8D 8H 3H 2C AS";
     card_stack *payload = cardStackFromCStr(cards);
-    sortInputHand(payload);
+    printCardStack(payload); putchar('\n');
+    card_stack *result = NULL;
+    
+    result = sortInputHand(payload);
+
+    printCardStack(result); putchar('\n');
+    
     return false;
 }
 

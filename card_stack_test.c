@@ -172,11 +172,13 @@ bool TEST_popCard(){
 bool TEST_cardStackFromCStr() {
     printf("TEST_cardStackFromCStr()\n");
     char payload[] = "AH AS AD AC 2H 2C";
+    //This test should strncmp because my eyes may lie!
     printCardStack(cardStackFromCStr(payload));
     
     return true;
 }
 
 bool TEST_concatCardLists() {
+    printf("TEST_concatCardLists()\n");
     return false;
 }
