@@ -167,8 +167,9 @@ void printCardStack(card_stack *head) {
     while (head != NULL) {
         putchar(faceToCharTable[head->card.value]);
         putchar(suitToCharTable[head->card.suit]);
-        putchar(' ');
+        if (head->next != NULL) putchar(' ');
         head = head->next;
+        
     }
 }
 
